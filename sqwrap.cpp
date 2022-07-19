@@ -10,7 +10,7 @@
 #include "osthread.h"
 
 static __thread HookPrint _hook_print;
-static __thread HSQUIRRELVM __vm;
+static __thread HSKVM __vm;
 
 /*static*/
 void SqEnv::set_print_foo(HookPrint  hp)
@@ -60,10 +60,10 @@ void SqEnv::_init(size_t sz)
     sq_notifyallexceptions(*_vm, true);
 }
 
-void SqEnv::debug_hook(HSQUIRRELVM /*v*/,
-                       SQInteger tip/*type*/,
+void SqEnv::debug_hook(HSKVM /*v*/,
+                       int tip/*type*/,
                        const SQChar * s/*sourcename*/,
-                       SQInteger line/*line*/,
+                       int line/*line*/,
                        const SQChar * func/*funcname*/)
 {
     //AutoLock a(&_m);
@@ -76,7 +76,7 @@ void SqEnv::debug_hook(HSQUIRRELVM /*v*/,
     }
 }
 
-void SqEnv::print_func(HSQUIRRELVM, const SQChar * s,...)
+void SqEnv::print_func(HSKVM, const SQChar * s,...)
 {
     //AutoLock a(&_m);
     char szBuffer[16384];
@@ -93,7 +93,7 @@ void SqEnv::print_func(HSQUIRRELVM, const SQChar * s,...)
 }
 
 
-SQInteger SqEnv::error_handler(HSQUIRRELVM v)
+isize_t SqEnv::error_handler(HSKVM v)
 {
     //AutoLock a(&_m);
     const SQChar *sErr = 0;
@@ -160,7 +160,7 @@ MyScript SqEnv::compile_buffer(const SQChar *s,  size_t length, const SQChar * d
 
     SQObject obj;
     if(SQ_FAILED(sq_compilebuffer(*_vm, s,
-                                  static_cast<SQInteger>(length),
+                                  static_cast<int>(length),
                                   debugInfo, true)))
     {
         throw Sqrat::Exception(Sqrat::LastErrorString(*_vm));

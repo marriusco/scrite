@@ -23,6 +23,7 @@ INCLUDEPATH += sq/sqrat
 INCLUDEPATH += sq/sqrat/include/sqrat
 
 SOURCES += main.cpp \
+    sqratimport.cpp \
     sqwrap.cpp \
     demo.cpp
 
@@ -38,6 +39,7 @@ LIBS += -ldl -lpthread
 
 
 DISTFILES += \
+    demo.js.txt
 
 target.path = ./bin
 INSTALLS += target
@@ -45,16 +47,18 @@ INSTALLS += target
 
 
 
-unix:!macx: LIBS += -L$$PWD/lib/ -lsquirrel
+unix:!macx: LIBS += -L$$PWD/lib/ -lsquirrel-x86_64-Linux
 
 INCLUDEPATH += $$PWD/.
 DEPENDPATH += $$PWD/.
 
-unix:!macx: PRE_TARGETDEPS += $$PWD/lib/libsquirrel.a
+# libsqstdlib-x86_64-Linux.a  libsquirrel-x86_64-Linux.a
 
-unix:!macx: LIBS += -L$$PWD/lib/ -lsqstdlib
+unix:!macx: PRE_TARGETDEPS += $$PWD/lib/libsquirrel-x86_64-Linux.a
+
+unix:!macx: LIBS += -L$$PWD/lib/ -lsqstdlib-x86_64-Linux
 
 INCLUDEPATH += $$PWD/.
 DEPENDPATH += $$PWD/.
 
-unix:!macx: PRE_TARGETDEPS += $$PWD/lib/libsqstdlib.a
+unix:!macx: PRE_TARGETDEPS += $$PWD/lib/libsqstdlib-x86_64-Linux.a
