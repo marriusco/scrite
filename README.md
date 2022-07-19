@@ -1,32 +1,15 @@
 # scrite
-scripting engine template C++ / Squirrel
 
-template for squirrel embedded script engine
+## scripting engine template C++ / Squirrel + Sqrat.
 
-```cpp
-      /**
-      export global functions to script
-      */
-    Sqrat::RootTable(sq.theVM()).Func("GlobalCall",
-                     &RunCtx::GlobalCall);
+ * Demonstrate
+    * export global functions to script "main"
+    * export class and methods to script "Demo"
+    * instantiates the class Demo in script and calls methods
+    * callback from C++ to script "loop"
+    * calls an exported function from C++ by name "Method2"
+    
+    
 
-    /**
-      export classes to script
-    */
-
-    Sqrat::Class<Demo> cls(sq.theVM(), _SC("Demo"));
-    cls.Ctor<int>();
-    cls.Ctor();
-    cls.Func(_SC("Method"), &Demo::Method);
-    Sqrat::RootTable().Bind(_SC("Demo"), cls);
-```
-
-
-
-###  You can check my reverse ssh online service and online key value database at 
-
-[reverse ssh as a service](http://www.mylinuz.com)
-
-[key value database as a service](https://www.meeiot.org)
 
 
