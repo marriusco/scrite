@@ -1,6 +1,7 @@
 # scrite
 
 ## scripting engine template C++ / Squirrel + Sqrat.
+## Project for QTCreator
 
  * Demonstrate
     * export global functions to script "main"
